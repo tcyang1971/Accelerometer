@@ -29,7 +29,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val x: Float = event.values.get(0)
         val y: Float = event.values.get(1)
         val z: Float = event.values.get(2)
-        txv.setText(String.format("x軸: %1.2f \ny軸: %1.2f \nz軸: %1.2f", x, y, z))
+        //txv.setText(String.format("x軸: %1.2f \ny軸: %1.2f \nz軸: %1.2f", x, y, z))
+        if (Math.abs(x)<1 && Math.abs(y)<1 && z<-9) {
+            txv.setText("朝下平放")
+        }
+        else if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 32) {
+            txv.setText("手機搖晃")
+        }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
